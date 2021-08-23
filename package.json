@@ -1,0 +1,29 @@
+{
+  "name": "cellunatic",
+  "description": "Cellunatic, tienda de accesorios, repuestos y servicio técnico profesional en dispositivos móviles, computadores y laptops",
+  "url": "cellunatic.store",
+  "version": "1.8.0",
+  "engines": {
+    "node": "12.x"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && cp .next/service-worker.js public/",
+    "export": "rm public/service-worker.js && next export",
+    "start": "next start ",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "next": "^10.2.0",
+    "next-offline": "^5.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.21",
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.3",
+    "typescript": "4.0"
+  },
+  "license": "MIT"
+}
