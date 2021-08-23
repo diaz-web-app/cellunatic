@@ -1,10 +1,10 @@
 {
   "name": "cellunatic",
   "description": "Cellunatic, tienda de accesorios, repuestos y servicio técnico profesional en dispositivos móviles, computadores y laptops",
-  "url": "cellunatic.store",
-  "version": "1.8.0",
+  "url": "cellunatic.com",
+  "version": "1.9.0",
   "engines": {
-    "node": "12.x"
+    "node": "14.x"
   },
   "scripts": {
     "dev": "next dev",

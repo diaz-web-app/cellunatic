@@ -59,7 +59,8 @@ const nextConfig = {
 module.exports = withOffline(
   {
     env:{
-      API:process.env.API
+      API:process.env.API,
+      DOMAIN:process.env.DOMAIN
     }
   }
 )
