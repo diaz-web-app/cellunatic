@@ -1,25 +1,12 @@
-import Link from "next/link"
 import { TCategoria, TGetPost } from "../interfaces/interfaces"
 
-type ParamsCatWidget={
-    categorias:TCategoria[]
-    pagina:TGetPost
-}
-const AsideWidgetCats=({pagina,categorias}:ParamsCatWidget)=>{
+const AsideWidgetAds=()=>{
     return(
         <ul className="aside_widget" >
             <p>Categorias</p>
-            {
-                categorias.map((categoria:TCategoria,i:number)=>{
-                        return (
-                            <li key={i}>
-                                <Link href={"/"+pagina?.post?.url+'/'+categoria.url} >
-                                    <a href={"/"+pagina?.post?.url+'/'+categoria.url} title={categoria.titulo} >{categoria.titulo}</a>
-                                </Link>
-                            </li>
-                    )
-                })
-            }
+            <li>
+                anuncio
+            </li>
             <style jsx>
                 {
                     `
@@ -28,9 +15,6 @@ const AsideWidgetCats=({pagina,categorias}:ParamsCatWidget)=>{
                             padding:8px 5px;
                             background:var(--primary-color);
                             margin-bottom:10px;
-                        }
-                        ul li{
-                            list-style:none;
                         }
                         ul p{
                             font-weight:bold;
@@ -50,4 +34,4 @@ const AsideWidgetCats=({pagina,categorias}:ParamsCatWidget)=>{
         </ul>
     )
 }
-export default AsideWidgetCats
+export default AsideWidgetAds

@@ -1,11 +1,7 @@
 import Link from 'next/link'
-import { TGetPosts, TPost } from '../interfaces/interfaces'
 
-type Params={
-    paginas:TGetPosts | null
-}
 
-const Intro = ({paginas}:Params)=>{
+const Intro = ()=>{
     
     return <article className="intro" >
 
@@ -17,11 +13,10 @@ const Intro = ({paginas}:Params)=>{
                 </div>
 
                 <nav className="botonera" style={{ width: '100%', textAlign: 'center' }} >
-                    {
-                        paginas && paginas.total_posts > 0? (
-                            paginas.posts.map((pagina:TPost,i:number)=><Link key={i} href={`/`+pagina.url} ><a>{pagina.titulo}</a></Link>)                            
-                        ):<p>Loading...</p>
-                    }
+                    
+                    <Link href="/accesorios" ><a href="/accesorios" title="accesorios">Accesorios</a></Link>                           
+                    <Link href="/servicio-tecnico" ><a href="/servicio-tecnico" title="servicio tecnico">Servicio Técnico</a></Link>                          
+                       
                 </nav>
         </article>
 }

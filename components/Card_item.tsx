@@ -53,8 +53,7 @@ const Card_Item = ({posts_data}:Params) => {
                     }
                     .container_cards .post_card .post_card_container_cover{
                         width:100%;
-                        height:100px;
-                        background:white;
+                        height:200px;
                         text-align:center;
                     }
                     .container_cards .post_card .post_card_container_cover img{
@@ -68,11 +67,6 @@ const Card_Item = ({posts_data}:Params) => {
                     @media(min-width:640px){
                         .container_cards{
                             grid-template-columns:repeat(3,1fr)
-                        }
-                    }
-                    @media(min-width:820px){
-                        .container_cards{
-                            grid-template-columns:repeat(4,1fr)
                         }
                     }
                     `

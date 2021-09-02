@@ -1,7 +1,7 @@
 type GetCatParams={
-    tipo_post?:string
+    url_post?:string
 }
-export const get_categorias=async({tipo_post}:GetCatParams)=>{
-    const request = await fetch(`${process.env.API}/categorias/${tipo_post?tipo_post:''}`)
+export const get_categorias=async({url_post}:GetCatParams)=>{
+    const request = await fetch(`${process.env.API}/categorias/${url_post?url_post:''}`)
     return await request.json()
 }

@@ -1,14 +1,26 @@
 import Head from "next/head";
 import {GetServerSideProps,GetServerSidePropsContext} from 'next'
-import { get_post } from "../../api/get_posts_controllers";
-import { TGetPost, TMeta } from "../../interfaces/interfaces";
+import { get_post, get_posts } from "../../api/get_posts_controllers";
+import { TGetPost, TGetPosts, TMeta } from "../../interfaces/interfaces";
 import { useRouter } from "next/dist/client/router";
+import { useMemo } from "react";
+import LastPosts from "../../components/Last_Posts";
 
 type Props={
     pagina:TGetPost
+    accesorios:TGetPosts
 }
-const Accesorios = ({pagina}:Props) => {
+const The_post = ({pagina,accesorios}:Props) => {
     const {route} = useRouter()
+    const items = useMemo(()=>{
+        if(accesorios && accesorios.total_posts > 0){
+
+            return <LastPosts request_posts={accesorios} 
+            title='Articulos similares' 
+            text=''
+            />
+        }
+    },[accesorios])
     return (
         <main>
             <Head>
@@ -53,6 +65,8 @@ const Accesorios = ({pagina}:Props) => {
                         </div>
                     </div>
                 </article>
+
+                {items}
             </section>
             <style jsx>
                 {
@@ -94,9 +108,10 @@ const Accesorios = ({pagina}:Props) => {
 export const getServerSideProps:GetServerSideProps = async ({params}:GetServerSidePropsContext)=>{
     const {url}:any = params
     const pagina =  await get_post({url})
-   
+    const accesorios:TGetPosts = await get_posts({tipo:pagina.post.tipo,limite:6})
     return {props:{
-            pagina
+            pagina,
+            accesorios
         }}
 }
-export default Accesorios
+export default The_post

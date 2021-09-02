@@ -1,16 +1,10 @@
 import Link from "next/link"
-import { useContext, useEffect, useState } from "react"
-import { get_categorias } from "../api/get_categorias_controllers"
+import { useContext } from "react"
 import GlobalAppContext from "../context/app/app_state"
-import { TCategoria, TGetCategoria, TMeta } from "../interfaces/interfaces"
+import SubMenuItems from "./Sub_menu_items"
 
 const Navigation = () => {
     const {app,app_dispatch} = useContext(GlobalAppContext)
-    const [categoriasMenu,setCategoriasMenu] = useState<TCategoria[]>([])
-    const get_cats = async()=>{
-        const response_cats:TGetCategoria = await get_categorias({})
-         setCategoriasMenu(response_cats)
-    }
 
     const menu_handler=()=>{
         app_dispatch(
@@ -20,33 +14,22 @@ const Navigation = () => {
             }
         )
     }
-    useEffect(()=>{
-        get_cats()
-    },[app.paginas_state])
     return (
             <>
-                <div onClick={menu_handler} className="effect_menu">.</div>
+                <div onClick={menu_handler} className="effect_menu"></div>
                 <nav className="principal" >
+                    <div style={{display:'flex',flexFlow:'row nowrap',justifyContent:'flex-start',alignItems:'center',padding:'10px 3px'}} className="logo">
+                        <img style={{ margin: '0 5px' }} src="/favicon.ico" alt="cellunatic logo" width="32px" height="32px" />
+                        <b>Cellunatic</b>
+                    </div>
                     <ul>
                         {
                            app.paginas_state?(
                             app.paginas_state.posts.map((pagina)=>{
-                                const meta = app.paginas_state?.metas?.find((meta:TMeta)=>meta.clave=='tipo de post' && meta.id_post == pagina._id)
                                 
                                 return (
                                     <li onClick={menu_handler} key={pagina._id} ><Link href={"/"+pagina.url} ><a href={"/"+pagina.url} >{pagina.titulo}</a></Link>
-                                        <ul>
-                                            {
-                                                pagina.categoria.map((cat)=>{
-                                                const data =  categoriasMenu.filter(current=>current._id == cat)
-                                                    return data.map(category=>{
-                                                        return (
-                                                            <li onClick={menu_handler} key={category._id} ><Link href={"/"+meta?.contenido+"/"+category.url}><a href={"/"+meta?.contenido+"/"+category.url}>{category.titulo}</a></Link></li>
-                                                        )
-                                                    })
-                                                })
-                                            }
-                                        </ul>
+                                        <SubMenuItems pagina={pagina} />
                                     </li>
                                 )
                             })
@@ -101,9 +84,6 @@ const Navigation = () => {
                             padding:8px 3px;
                             border-bottom:1px solid var(--secondary-color);
                             text-transform: capitalize;
-                        }
-                        nav.principal > ul ul li a{
-                            padding-left:15px;
                         }
                         nav.principal a:hover{
                             color:var(--secondary-color);

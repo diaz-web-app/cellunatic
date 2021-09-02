@@ -1,5 +1,3 @@
-
-
 type GetPostsParams={
     tipo?:string
     estado?:string
@@ -18,4 +16,18 @@ type GetPostParams={
 export const get_post = async({tipo,url,estado}:GetPostParams)=>{
     const request = await fetch(`${process.env.API}/post/${tipo?tipo:'any'}/${url}/${estado?estado:''}`)
     return await request.json()
+}
+
+type GetSearchParams={
+    text:string
+}
+export const get_search = async({text}:GetSearchParams)=>{
+    try {
+        const request = await fetch(`${process.env.API}/search/${text}`)
+        if(request.status === 404) return request.status
+        return await request.json()
+    } catch (error) {
+        console.error(error)
+        return false
+    }
 }

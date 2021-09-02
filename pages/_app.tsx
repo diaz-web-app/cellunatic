@@ -71,7 +71,6 @@ function Myapp({ Component, pageProps }: AppProps) {
               box-sizing: border-box;
               text-decoration: none;
               outline: none;
-              list-style: none;
               border:none;
               -webkit-font-smoothing: antialiased;
               -moz-osx-font-smoothing: grayscale;
@@ -150,7 +149,9 @@ function Myapp({ Component, pageProps }: AppProps) {
               flex-flow: row nowrap;
               justify-content: space-between;
               align-items: center;
-              height:var(--height-header);
+              margin-top:calc(var(--height-header) / 5);
+              background:rgba(0,0,0, .5);
+              border-radius:10px;
           }
           .header_barr .logo{
               color:var(--secondary-color);
@@ -166,10 +167,6 @@ function Myapp({ Component, pageProps }: AppProps) {
           }
           .nav_header .btn_login{
               display: none;
-          }
-          .header_barr > form{
-              width:50%;
-              text-align: center;
           }
           
           /*/////////////////////////*/
@@ -257,7 +254,6 @@ function Myapp({ Component, pageProps }: AppProps) {
             aside{
                 display: block;
                 height:max-content;
-                position: fixed;
             }
               main{
                   grid-template-columns: 250px 1fr;

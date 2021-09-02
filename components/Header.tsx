@@ -1,9 +1,12 @@
 import Link from 'next/link'
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import GlobalAppContext from '../context/app/app_state'
+import SearchBar from './Search_bar'
+
 
 const Header = () => {
     const {app, app_dispatch} = useContext(GlobalAppContext)
+    const searchbar = useMemo(()=><SearchBar />,[])
     const menu_handler=()=>{
         app_dispatch(
             {
@@ -22,7 +25,7 @@ const Header = () => {
                         <b>Cellunatic</b>
                     </a>
                 </Link>
-                
+                {searchbar}
                 <div className="nav_header">                    
                     <button onClick={menu_handler} >menu</button>
                 </div>

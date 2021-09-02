@@ -14,9 +14,9 @@ const ServicioTecnico = ({pagina}:Props) => {
     return (
         <main>
             <Head>
-                <title>{pagina.post?pagina.post.titulo:''} - Cellunatic</title>
+                <title>Servicio tecnico - Cellunatic</title>
                 <meta name="description" content={pagina.post?pagina.post.contenido:''} />
-                <meta name="keywords" content={""}/>
+                <meta name="keywords" content={pagina.post?pagina.post.keywords:''}/>
                 <link rel="canonical" href={process.env.DOMAIN+route} />
                 <meta property="og:locale" content="es_ES" />
                 <meta property="og:type" content="website" />
@@ -51,7 +51,7 @@ const ServicioTecnico = ({pagina}:Props) => {
                 </section>
                 <section id="tag" >
                     <article>
-                        <h2 style={{ textAlign: 'center', margin: '0 0 20px 0' }} >Servicio Técnico Hardware </h2>
+                        <h2>Servicio Técnico Hardware </h2>
 
                         <p >
                             Debido a que contamos con repuestos originales en stock, podemos asegurarte una rápida y
@@ -94,7 +94,7 @@ const ServicioTecnico = ({pagina}:Props) => {
                     </article>
 
                     <article>
-                        <h2 style={{ textAlign: 'center', margin: '20px 0' }} >Servicio Técnico Software</h2>
+                        <h2>Servicio Técnico Software</h2>
                         <p>
                             Si tienes problemas con la funcionalidad o el sistema operativo de tu celular. Contamos con el
                             Software necesario para realizar cualquier arreglo, dejando la funcionalidad del celular
@@ -126,6 +126,22 @@ const ServicioTecnico = ({pagina}:Props) => {
                     </article>
                 </section>
             </section>
+            <style jsx>
+                {
+                    `
+                    article > h2{
+                        margin: 20px auto;
+                        text-align:center;
+                    }
+                    article > p{
+                        padding:20px 10px;
+                    }
+                    ol li{
+                        margin:5px 0;
+                    }
+                    `
+                }
+            </style>
         </main>
     )
 }

@@ -49,23 +49,16 @@ const Accesorios = ({categorias,pagina,posts_data}:Props) => {
 }
 export const getServerSideProps:GetServerSideProps = async ({params}:GetServerSidePropsContext)=>{
 const {cat}:any = params
-   const categorias =  await get_categorias({tipo_post:'accesorios'})
-   const pagina:TGetPost =  await get_post({tipo:'pagina',url:'accesorios'})
-   const meta = pagina.metas.find(meta=>meta.id_post==pagina.post?._id && meta.clave=='tipo de post')
-   if(cat){
-       const posts_data:TGetPosts =  await get_posts({tipo:meta?meta.contenido:'pagina',categoria:cat})
 
-       return {props:{
-                categorias,
-                pagina,
-                posts_data
-            }}
-   }
-   return {props:{
-        categorias,
-        pagina,
-        posts_data:[]
-    }}
+    const categorias =  await get_categorias({url_post:'accesorios'})
+    const pagina:TGetPost =  await get_post({tipo:'pagina',url:'accesorios'})
+    const posts_data:TGetPosts =  await get_posts({tipo:'accesorio',categoria:cat})
+
+    return {props:{
+            categorias,
+            pagina,
+            posts_data
+        }}
     
 }
 export default Accesorios

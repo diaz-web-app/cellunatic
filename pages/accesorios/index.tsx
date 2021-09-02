@@ -5,6 +5,7 @@ import { get_post } from "../../api/get_posts_controllers";
 import { TGetCategoria, TGetPost } from "../../interfaces/interfaces";
 import { useRouter } from "next/dist/client/router";
 import AsideWidgetCats from "../../components/aside_widget_cats";
+import TSG_article from "../../components/TSG_article";
 
 type Props={
     categorias:TGetCategoria
@@ -53,51 +54,37 @@ const Accesorios = ({categorias,pagina}:Props) => {
                         artículos. Cellunatic hace un repaso de los accesorios
                         más comprados, populares e innovadores del momento.
                     </p>
-                    <article className="copy_article">
-                        <h2>Cable USB y Cargador</h2>
-                        <p>
-                            son productos muy
-                            importantes. Existen cargadores que se enchufan mediante el
-                            encendedor del auto o vía USB al estéreo para salir de algún
-                            apuro y darle una carga rápida al dispositivo. Son muy útiles
-                            cuando se va a realizar un viaje largo.
-                        </p>
-                    </article>
+                    
+                    <TSG_article 
+                        title="Auriculares" 
+                        text="Son artículos muy usados. Tienen un alto nivel de ventas.También son muy personales tenemos variedad segun la calidad de sonido y marcas, por lo que es recomendable comprar distintos audífonos y no utilizar los estándar que vienen incluidos cuando comprás un celular." 
+                        src="/img/auriculares_banner.jpg"
+                    />
 
-                    <article className="copy_article">
-                        <h2>Vidrio templado o protectores de pantalla</h2>
-                        <p>
-                            Estas delgadas láminas cubren y cuidan la pantalla de
-                            nuestro teléfono contra los rayones. Existe una nueva
-                            tecnología en estos lms llamados Gorilla Glass que es una
-                            pequeña capa de vidrio que se coloca sobre la pantalla para
-                            protegerla de los daños exteriores que podrían originarse.
-                        </p>
-                    </article>
+                    <TSG_article 
+                        title="Cable USB y Cargador" 
+                        text="son productos muy importantes. Existen cargadores que se enchufan mediante el encendedor del auto o vía USB al estéreo para salir de algún apuro y darle una carga rápida al dispositivo. Son muy útiles cuando se va a realizar un viaje largo." 
+                        src="/img/usb_cable_banner.jpg"
+                    />
 
-                    <article className="copy_article">
-                        <h2>Auriculares</h2>
-                        <p>
-                            Son artículos muy usados. Tienen un alto
-                            nivel de ventas.También son muy
-                            personales tenemos variedad segun la calidad de sonido y marcas,
-                            por lo que es recomendable comprar
-                            distintos audífonos y no utilizar los estándar que vienen
-                            incluidos cuando comprás un celular.
-                        </p>
-                    </article>
+                    <TSG_article 
+                        title="Vidrio templado o protectores de pantalla" 
+                        text="son productos muy importantes. Existen cargadores que se enchufan mediante el encendedor del auto o vía USB al estéreo para salir de algún apuro y darle una carga rápida al dispositivo. Son muy útiles cuando se va a realizar un viaje largo." 
+                        src="/img/glass_banner.jpg"
+                        />
+
                 </section>
             </section>
         </main>
     )
 }
 export const getStaticProps:GetStaticProps = async (_:GetStaticPropsContext)=>{
-   const categorias =  await get_categorias({tipo_post:'accesorios'})
-   const pagina =  await get_post({tipo:'pagina',url:'accesorios'})
-   
-   return {props:{
-            categorias,
-            pagina
-        },revalidate:1}
+    const pagina:TGetPost =  await get_post({tipo:'pagina',url:'accesorios'})
+    const categorias =  await get_categorias(pagina && pagina.post?{url_post:pagina.post.url}:{})
+  
+    return {props:{
+                categorias,
+                pagina
+            },revalidate:1}
 }
 export default Accesorios
