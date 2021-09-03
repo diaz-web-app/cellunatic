@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import LastPosts from "../../components/Last_Posts";
 import ModalCompra from "../../components/modal.compra";
 import ModalCovers from "../../components/modal.covers";
+import ModalShare from "../../components/modal.share";
 
 type Props={
     pagina:TGetPost
@@ -71,6 +72,7 @@ const The_post = ({pagina,accesorios}:Props) => {
                         <p>{pagina.post?.contenido}</p>
                         <div className="actions">
                             <ModalCompra/>
+                            <ModalShare/>
                         </div>
                     </div>
                     <ModalCovers modal={modalCovers} setModal={setModalCovers} src={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:'/logo512x512.png'} />
