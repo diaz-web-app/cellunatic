@@ -4,6 +4,7 @@ import { get_search } from "../../api/get_posts_controllers";
 import { TGetPosts } from "../../interfaces/interfaces";
 import { useMemo } from "react";
 import Card_Item from "../../components/Card_item";
+import { useRouter } from "next/dist/client/router";
 
 
 type Props={
@@ -11,7 +12,7 @@ type Props={
 }
 
 const Accesorios = ({accesorios}:Props) => {
-
+    const {asPath} = useRouter()
     const items = useMemo(()=>{
         if(accesorios.posts){
             return <Card_Item posts_data={accesorios} />
@@ -24,12 +25,12 @@ const Accesorios = ({accesorios}:Props) => {
                 <title>Cellunatic</title>
                 <meta name="description" content="Cellunatic, tienda de accesorios, repuestos y servicio técnico profesional en dispositivos móviles, computadores y laptops" />
                 <meta name="keywords" content="cellunatic, servicio tecnico a domicilio carabobo, servicio tecnico domicilio valencia, repuestos para telefonos, accesorios para telefonos"/>
-                <link rel="canonical" href={process.env.DOMAIN} />
+                <link rel="canonical" href={process.env.DOMAIN+asPath} />
                 <meta property="og:locale" content="es_ES" />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="Cellunatic" />
                 <meta property="og:description" content="Cellunatic, tienda de accesorios, repuestos y servicio técnico profesional en dispositivos móviles, computadores y laptops" />
-                <meta property="og:url" content={process.env.DOMAIN} />
+                <meta property="og:url" content={process.env.DOMAIN+asPath} />
                 <meta property="og:site_name" content="cellunatic.store" />
                 <meta property="og:image" content={process.env.DOMAIN+"/logo512x512.png"} />
                 <meta property="og:image:secure_url" content={process.env.DOMAIN+"/logo512x512.png"} />
@@ -39,7 +40,7 @@ const Accesorios = ({accesorios}:Props) => {
                 <meta name="twitter:description" content="Cellunatic, tienda de accesorios, repuestos y servicio técnico profesional en dispositivos móviles, computadores y laptops" />
                 <meta name="twitter:title" content="Cellunatic" />
                 <meta name="twitter:image" content={process.env.DOMAIN+"/logo512x512.png"} />
-                <link rel="shortlink" href={process.env.DOMAIN} />
+                <link rel="shortlink" href={process.env.DOMAIN+asPath} />
             </Head>
 
             <section className="full_width">

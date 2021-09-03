@@ -13,19 +13,19 @@ type Props={
 }
 
 const Accesorios = ({categorias,pagina}:Props) => {
-    const {route} = useRouter()
+    const {asPath} = useRouter()
     return (
         <main>
             <Head>
                 <title>{pagina.post?pagina.post.titulo:''} - Cellunatic</title>
                 <meta name="description" content={pagina.post?pagina.post.contenido:''} />
                 <meta name="keywords" content={""}/>
-                <link rel="canonical" href={process.env.DOMAIN+route} />
+                <link rel="canonical" href={process.env.DOMAIN+asPath} />
                 <meta property="og:locale" content="es_ES" />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={pagina.post?pagina.post.titulo:'cellunatic'}/>
                 <meta property="og:description" content={pagina.post?pagina.post.contenido:''} />
-                <meta property="og:url" content={process.env.DOMAIN+route} />
+                <meta property="og:url" content={process.env.DOMAIN+asPath} />
                 <meta property="og:site_name" content={process.env.DOMAIN} />
                 <meta property="og:image" content={process.env.DOMAIN+"/logo512x512.png"} />
                 <meta property="og:image:secure_url" content={process.env.DOMAIN+"/logo512x512.png"} />
@@ -35,7 +35,7 @@ const Accesorios = ({categorias,pagina}:Props) => {
                 <meta name="twitter:description" content={pagina.post?pagina.post.contenido:''} />
                 <meta name="twitter:title" content={pagina.post?pagina.post.titulo+' - Cellunatic':'Cellunatic'} />
                 <meta name="twitter:image" content={process.env.DOMAIN+"/logo512x512.png"} />
-                <link rel="shortlink" href={process.env.DOMAIN+route} />
+                <link rel="shortlink" href={process.env.DOMAIN+asPath} />
             </Head>
             <aside>
                 <AsideWidgetCats categorias={categorias} pagina={pagina} />

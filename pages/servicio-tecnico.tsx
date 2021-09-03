@@ -24,14 +24,14 @@ const ServicioTecnico = ({pagina}:Props) => {
                 <meta property="og:description" content={pagina.post?pagina.post.contenido:''} />
                 <meta property="og:url" content={process.env.DOMAIN+route} />
                 <meta property="og:site_name" content={process.env.DOMAIN} />
-                <meta property="og:image" content={process.env.DOMAIN+"/logo512x512.png"} />
-                <meta property="og:image:secure_url" content={process.env.DOMAIN+"/logo512x512.png"} />
+                <meta property="og:image" content={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
+                <meta property="og:image:secure_url" content={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
                 <meta property="og:image:width" content="32" />
                 <meta property="og:image:height" content="32" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:description" content={pagina.post?pagina.post.contenido:''} />
                 <meta name="twitter:title" content={pagina.post?pagina.post.titulo+' - Cellunatic':'Cellunatic'} />
-                <meta name="twitter:image" content={process.env.DOMAIN+"/logo512x512.png"} />
+                <meta name="twitter:image" content={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
                 <link rel="shortlink" href={process.env.DOMAIN+route} />
             </Head>
             <section className="full_width" >

@@ -24,6 +24,7 @@ const ModalCovers = ({src,modal,setModal}:Props) => {
                     .img_box{
                         height: calc(100vh - 10%);
                         top:5%;bottom:5%;left:5%;right:5%;
+                        overflow:hidden;
                     }
                     img{
                         width:100%;

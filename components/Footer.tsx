@@ -49,8 +49,8 @@ const Footer = () => {
                         <section>
                             <h3>Social</h3>
                             <ul className="icons alt">
-                                <li><a href="#" className="icon alt fa-facebook"><span className="label">Facebook</span></a></li>
-                                <li><a href="#" className="icon alt fa-instagram"><span className="label">Instagram</span></a></li>
+                                <li><a href="https://www.facebook.com/Cellunatic2017CG/" className="icon alt fa-facebook"><span className="label">Cellunatic2017CG en Facebook</span></a></li>
+                                
                             </ul>
                         </section>
                     </section>
