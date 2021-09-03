@@ -14,7 +14,7 @@ type Props={
     accesorios:TGetPosts
 }
 const The_post = ({pagina,accesorios}:Props) => {
-    const {route} = useRouter()
+    const {asPath} = useRouter()
     const [modalCovers,setModalCovers] = useState<boolean>(false)
 
     const items = useMemo(()=>{
@@ -33,22 +33,22 @@ const The_post = ({pagina,accesorios}:Props) => {
                 <title>{pagina.post?pagina.post.titulo:''} - Cellunatic</title>
                 <meta name="description" content={pagina.post?pagina.post.contenido:''} />
                 <meta name="keywords" content={pagina.post?pagina.post.keywords:''}/>
-                <link rel="canonical" href={process.env.DOMAIN+route} />
+                <link rel="canonical" href={process.env.DOMAIN+asPath} />
                 <meta property="og:locale" content="es_ES" />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={pagina.post?pagina.post.titulo:'cellunatic'}/>
                 <meta property="og:description" content={pagina.post?pagina.post.contenido:''} />
-                <meta property="og:url" content={process.env.DOMAIN+route} />
+                <meta property="og:url" content={process.env.DOMAIN+asPath} />
                 <meta property="og:site_name" content={process.env.DOMAIN} />
-                <meta property="og:image" content={pagina.post && pagina.post.cover?pagina.post.cover:'/logo512x512.png'} />
-                <meta property="og:image:secure_url" content={pagina.post && pagina.post.cover?pagina.post.cover:'/logo512x512.png'} />
+                <meta property="og:image" content={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
+                <meta property="og:image:secure_url" content={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
                 <meta property="og:image:width" content="32" />
                 <meta property="og:image:height" content="32" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:description" content={pagina.post?pagina.post.contenido:''} />
                 <meta name="twitter:title" content={pagina.post?pagina.post.titulo+' - Cellunatic':'Cellunatic'} />
-                <meta name="twitter:image" content={pagina.post && pagina.post.cover?pagina.post.cover:'/logo512x512.png'} />
-                <link rel="shortlink" href={process.env.DOMAIN+route} />
+                <meta name="twitter:image" content={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
+                <link rel="shortlink" href={process.env.DOMAIN+asPath} />
             </Head>
 
             <section className="full_width">
