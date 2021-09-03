@@ -1,13 +1,17 @@
 import { useState } from "react"
+import { TPost } from "../interfaces/interfaces"
 
+type Props={
+    post?:TPost
+}
 
-const ModalShare = () => {
+const ModalShare = ({post}:Props) => {
     const [modal,setModal] = useState<boolean>(false)
     const share_handler = async()=>{
         const shareData = {
-            title: 'MDN',
-            text: 'Learn web development on MDN!',
-            url: 'https://developer.mozilla.org'
+            title: post?.titulo,
+            text: post?.contenido,
+            url: document.location.pathname
           }
          
             try {
@@ -26,16 +30,7 @@ const ModalShare = () => {
                 <h4 style={{margin:'5px 0',textAlign:'center',width:'100%'}}>Ofertar a travez de:</h4>
 
                 
-                    <a href={`tel:+584148733690`}>
-                        <b>Telefono</b>
-                        <button>+584148733690</button>
-                    </a>                   
-
-               
-                    <a href={`tel:+584148733690`}>
-                        <b>Whatsapp</b>
-                        <button>+584148733690</button>
-                    </a>
+                    <p>{document.location.pathname}</p>
 
                     <button style={{margin:'20px auto'}} onClick={()=>setModal(false)} >Cerrar</button>
             </div>

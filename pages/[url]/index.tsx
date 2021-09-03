@@ -72,7 +72,7 @@ const The_post = ({pagina,accesorios}:Props) => {
                         <p>{pagina.post?.contenido}</p>
                         <div className="actions">
                             <ModalCompra/>
-                            <ModalShare/>
+                            <ModalShare post={pagina.post?pagina.post:null} />
                         </div>
                     </div>
                     <ModalCovers modal={modalCovers} setModal={setModalCovers} src={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:'/logo512x512.png'} />
