@@ -1,4 +1,3 @@
-import { TCategoria, TGetPost } from "../interfaces/interfaces"
 
 const AsideWidgetAds=()=>{
     return(
