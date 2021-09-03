@@ -12,15 +12,15 @@ const ModalCompra = () => {
                 <h4 style={{margin:'5px 0',textAlign:'center',width:'100%'}}>Ofertar a travez de:</h4>
 
                 
-                    <a href={`tel:+584148733690`}>
+                    <a href={`tel:+584128439575`}>
                         <b>Telefono</b>
-                        <button>+584148733690</button>
+                        <button>+584128439575</button>
                     </a>                   
 
                
-                    <a href={`tel:+584148733690`}>
+                    <a href={`tel:+584128439575`}>
                         <b>Whatsapp</b>
-                        <button>+584148733690</button>
+                        <button>+584128439575</button>
                     </a>
 
                     <button style={{margin:'20px auto'}} onClick={()=>setModal(false)} >Cerrar</button>

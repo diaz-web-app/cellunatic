@@ -40,7 +40,7 @@ const Footer = () => {
                         </section>
                         <section>
                             <h3>Phone</h3>
-                            <p><a href="tel:+584148733690">(+58) 4148733690</a></p>
+                            <p><a href="tel:+584128439575">(+58) 4128439575</a></p>
                         </section>
                         <section>
                             <h3>Email</h3>

@@ -12,7 +12,7 @@ function Myapp({ Component, pageProps }: AppProps) {
     <Head>
       <link rel="manifest" href="/site.webmanifest.json" />
       <meta name="author" content="Diaz web app" />
-
+      <meta property="fb:app_id" content="102477285277539" />
       <link rel="apple-touch-icon" href="/logo512x512.png" />
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
