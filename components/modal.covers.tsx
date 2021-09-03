@@ -22,7 +22,7 @@ const ModalCovers = ({src,modal,setModal}:Props) => {
                         place-content:center;
                     }
                     .img_box{
-                        height:height: calc(100vh - 10%);
+                        height: calc(100vh - 10%);
                         top:5%;bottom:5%;left:5%;right:5%;
                     }
                     img{
@@ -32,7 +32,7 @@ const ModalCovers = ({src,modal,setModal}:Props) => {
                     }
                     @media(min-width:960px){
                         .img_box{
-                            height:height: calc(100vh - 20%);
+                            height: calc(100vh - 20%);
                             top:10%;bottom:10%;left:10%;right:10%;
                         }
                     }                    
