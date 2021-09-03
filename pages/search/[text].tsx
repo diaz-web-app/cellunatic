@@ -1,28 +1,20 @@
 import Head from "next/head";
 import {GetServerSideProps,GetServerSidePropsContext} from 'next'
 import { get_search } from "../../api/get_posts_controllers";
-import { TPost } from "../../interfaces/interfaces";
+import { TGetPosts } from "../../interfaces/interfaces";
 import { useMemo } from "react";
+import Card_Item from "../../components/Card_item";
 
 
 type Props={
-    accesorios:TPost[]
+    accesorios:TGetPosts
 }
-const Items = ({accesorios}:Props)=>{
-    return <>
-        {accesorios.length > 0?(
-            accesorios.map((post)=>(
-                <li key={post._id} >{post.titulo}</li>
-            ))
-        ):null}
-    </>
-    
-}
+
 const Accesorios = ({accesorios}:Props) => {
 
     const items = useMemo(()=>{
-        if(accesorios.length> 0){
-            return <Items accesorios={accesorios} />
+        if(accesorios.posts){
+            return <Card_Item posts_data={accesorios} />
         }
     },[accesorios])
 
@@ -102,7 +94,7 @@ const Accesorios = ({accesorios}:Props) => {
 export const getServerSideProps:GetServerSideProps = async ({params}:GetServerSidePropsContext)=>{
     const {text}:any = params
     
-    const accesorios:TPost[] = await get_search({text})
+    const accesorios = await get_search({text})
     return {props:{
             accesorios
         }}

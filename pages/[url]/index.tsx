@@ -3,8 +3,10 @@ import {GetServerSideProps,GetServerSidePropsContext} from 'next'
 import { get_post, get_posts } from "../../api/get_posts_controllers";
 import { TGetPost, TGetPosts, TMeta } from "../../interfaces/interfaces";
 import { useRouter } from "next/dist/client/router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import LastPosts from "../../components/Last_Posts";
+import ModalCompra from "../../components/modal.compra";
+import ModalCovers from "../../components/modal.covers";
 
 type Props={
     pagina:TGetPost
@@ -12,6 +14,8 @@ type Props={
 }
 const The_post = ({pagina,accesorios}:Props) => {
     const {route} = useRouter()
+    const [modalCovers,setModalCovers] = useState<boolean>(false)
+
     const items = useMemo(()=>{
         if(accesorios && accesorios.total_posts > 0){
 
@@ -21,6 +25,7 @@ const The_post = ({pagina,accesorios}:Props) => {
             />
         }
     },[accesorios])
+
     return (
         <main>
             <Head>
@@ -46,24 +51,29 @@ const The_post = ({pagina,accesorios}:Props) => {
             </Head>
 
             <section className="full_width">
+                <h1>{pagina.post?.titulo}</h1>
                 <article className="container_detalles_item" >
                     <div className="imgs">
-                        <img src={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:'/logo512x512.png'} alt=""/>
+                        <img onClick={()=>setModalCovers(true)} src={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:'/logo512x512.png'} alt=""/>
                     </div>
-                    <div className="detalles">
-                        <h1>{pagina.post?.titulo}</h1>
+                    <div className="detalles">                        
                         <div className="caracteristicas">
                             {
                                 pagina.metas.map((meta:TMeta,i:number)=>{
                                     return(
                                         <div className="post_metas" key={i} >
-                                            <b>{meta.clave}: </b><small>{meta.contenido}</small>
+                                            <b>{meta.clave}: </b><label>{meta.contenido}</label>
                                         </div>
                                     )
                                 })
                             }
                         </div>
+                        <p>{pagina.post?.contenido}</p>
+                        <div className="actions">
+                            <ModalCompra/>
+                        </div>
                     </div>
+                    <ModalCovers modal={modalCovers} setModal={setModalCovers} src={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:'/logo512x512.png'} />
                 </article>
 
                 {items}
@@ -71,28 +81,39 @@ const The_post = ({pagina,accesorios}:Props) => {
             <style jsx>
                 {
                     `
+                        h1{
+                            margin:20px 0;
+                        }
                         .container_detalles_item{
                             display:grid;
                             grid-template-columns:1fr;
                             gap:10px;
                         }
-                        .container_detalles_item .imgs, .container_detalles_item .detalles{
+                        .imgs,.detalles{
                             background:var(--primary-color);
                             height:max-content;
                             border-radius:10px;
                         }
-                        .container_detalles_item .imgs{
+                        .imgs{
                             text-align:center;
-                            height:unset;
-                            max-height:200px;
                         }
-                        .container_detalles_item .imgs img{
+                        .imgs img{
                             width:100%;
                             height:100%;
+                            max-height:400px;
                             object-fit:contain;
                         }
-                        .container_detalles_item .detalles{
+                        .detalles{
                             padding:10px;
+                        }
+                        .post_metas{
+                            margin-bottom:10px;
+                        }
+                        .post_metas label, .post_metas b{
+                            border-bottom:2px solid var(--secondary-color);
+                        }
+                        .post_metas b{
+                            text-transform:uppercase;
                         }
                         @media(min-width:760px){
                             .container_detalles_item{

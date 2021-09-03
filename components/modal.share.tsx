@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-const ModalCompra = () => {
+const ModalShare = () => {
     const [modal,setModal] = useState<boolean>(false)
 
     return (
@@ -67,4 +67,4 @@ const ModalCompra = () => {
         </>
     )
 }
-export default ModalCompra
+export default ModalShare

@@ -7,8 +7,11 @@ const Footer = () => {
                         <article>
                             <h3>Cellunatic</h3>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias doloribus laborum perferendis voluptatum, enim magnam voluptatibus mollitia nisi iure minima, veritatis laudantium, impedit pariatur deserunt officia! Dignissimos non maxime perferendis mollitia? Reprehenderit unde, culpa alias ad voluptatem id harum reiciendis cupiditate impedit voluptatibus maiores quia nobis dolore deleniti sed accusamus soluta? Itaque voluptatibus distinctio eos enim quidem unde rem quas!
+                                Empresa de tecnologia
                             </p>
+                            <footer>
+                                <p>j-41020890-2</p>
+                            </footer>
                         </article>
                         {/* <form>
                             <div className="fields">
@@ -32,17 +35,16 @@ const Footer = () => {
                     </section>
                     <section className="split contact">
                         <section className="alt">
-                            <h3>Address</h3>
-                            <p>1234 Somewhere Road #87257<br/>
-                            template, TN 00000-0000</p>
+                            <h3>Dirección</h3>
+                            <p>CC gran bazar centro, Valencia Edo. Carabobo, calle comercio entre montes de oca y Carabobo, Planta alta local ML-116</p>
                         </section>
                         <section>
                             <h3>Phone</h3>
-                            <p><a href="#">(000) 000-0000</a></p>
+                            <p><a href="tel:+584148733690">(+58) 4148733690</a></p>
                         </section>
                         <section>
                             <h3>Email</h3>
-                            <p><a href="#">info@untitled.tld</a></p>
+                            <p><a href="mailto:cellunatic2017cgc.a@gmail">cellunatic2017cgc.a@gmail</a></p>
                         </section>
                         <section>
                             <h3>Social</h3>
@@ -63,6 +65,18 @@ const Footer = () => {
                     }
                     footer > div{
                         display:grid;
+                    }
+                    footer div h3{
+                        padding:10px;
+                    }
+                    footer div p{
+                        padding:5px 20px;
+                    }
+                    footer div section > p{
+                        border-bottom:2px solid var(--secondary-color);
+                    }
+                    footer div > section:nth-child(2){
+                        border-left:2px solid var(--secondary-color);
                     }
                     @media(min-width:760px){
                         footer > div{
