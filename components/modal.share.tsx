@@ -11,7 +11,7 @@ const ModalShare = ({post}:Props) => {
         const shareData = {
             title: post?.titulo,
             text: post?.contenido,
-            url: document.location.pathname
+            url: process.env.DOMAIN+"/"+post?.url
           }
          
             try {
@@ -24,13 +24,13 @@ const ModalShare = ({post}:Props) => {
     }
     return (
         <>
-        <button onClick={share_handler}>Comprar</button>
+        <button onClick={share_handler}>Compartir</button>
         <div onClick={()=>setModal(false)} style={{ position: 'fixed', width: '100vw', height: '100vh',top:0,left:0,right:0,bottom:0, zIndex: 1000, background:'var(--primary-color)' }} ></div>
             <div style={{ padding:'10px 5px', borderRadius:5, position: 'fixed',top:'5%',bottom:'5%',left:'calc(50% - 150px)',background:'var(--primary-color)', border:'1px solid var(--font-color)',width: '300px', overflowX: 'hidden', overflowY: 'auto', zIndex: 1001 }}>
                 <h4 style={{margin:'5px 0',textAlign:'center',width:'100%'}}>Ofertar a travez de:</h4>
 
                 
-                    <p>{document.location.pathname}</p>
+                    <p>Copia y comparte la url: {process.env.DOMAIN+"/"+post?.url}</p>
 
                     <button style={{margin:'20px auto'}} onClick={()=>setModal(false)} >Cerrar</button>
             </div>
