@@ -5,12 +5,12 @@ const Footer = () => {
                 <div className="container">
                     <section>
                         <article>
-                            <h3>Cellunatic</h3>
+                            <h3>Cellunatic 2017 CG C.A.</h3>
                             <p>
-                                Empresa de tecnologia
+                                Pequeños tips para mejorar tu pc, teléfonos y muchos mas., Venta al mayor y detal accesorios, repuestos y equipos telefonicos nuevos y usados
                             </p>
                             <footer>
-                                <p>j-41020890-2</p>
+                                <p>RIF: j-41020890-2</p>
                             </footer>
                         </article>
                         {/* <form>
