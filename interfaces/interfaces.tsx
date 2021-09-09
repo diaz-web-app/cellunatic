@@ -22,6 +22,7 @@ export type TGetPosts= {
 export type TGetPost= {
     post:TPost | null
     metas:TMeta[]
+    covers:TGetMediaFile[]
 }
 //****** post metas ******//
 export type TMeta={
@@ -49,6 +50,33 @@ export type TTipoPost={
     createdAt: Date
     updatedAt: Date
 }
+//****** Media files *****/
+export type TMediaFile={
+    fieldname: string
+    originalname: string
+    encoding: string
+    mimetype: string
+    destination: string
+    filename: string
+    path: string
+    size:number
+  }
+
+export type TGetMediaFile={
+    _id: string
+    fieldname: string
+    originalname: string
+    encoding: string
+    mimetype: string
+    destination: string
+    filename: string
+    path: string
+    size:number
+    url: string
+    createdAt: string
+    updatedAt: string
+    id_post: string
+  }
 //****** Estado de la app ******//
 export type State = {
     paginas_state:TGetPosts | null

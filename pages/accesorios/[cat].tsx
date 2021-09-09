@@ -6,14 +6,28 @@ import { TGetCategoria, TGetPost, TGetPosts } from "../../interfaces/interfaces"
 import { useRouter } from "next/dist/client/router";
 import Card_Item from "../../components/Card_item";
 import AsideWidgetCats from "../../components/aside_widget_cats";
+import { useMemo } from "react";
 
 type Props={
     categorias:TGetCategoria
     pagina:TGetPost
     posts_data:TGetPosts
+    query:any
 }
-const Accesorios = ({categorias,pagina,posts_data}:Props) => {
-    const {asPath} = useRouter()
+const Accesorios = ({categorias,pagina,posts_data,query}:Props) => {
+    const {asPath,push} = useRouter()
+    const widget_categorias = useMemo(()=><AsideWidgetCats categorias={categorias} pagina={pagina} />,[])
+    
+    const more = ()=>{
+        let limite = parseInt(query.limite) + 4
+        if(limite <= posts_data.total_posts){            
+            push("/accesorios/"+query.cat+"?limite="+limite+"#more")
+        }
+        if(limite > posts_data.total_posts){            
+            push("/accesorios/"+query.cat+"?limite="+posts_data.total_posts+"#more")
+        }
+    }
+    
     return (
         <main>
             <Head>
@@ -38,26 +52,35 @@ const Accesorios = ({categorias,pagina,posts_data}:Props) => {
                 <link rel="shortlink" href={process.env.DOMAIN+asPath} />
             </Head>
             <aside>
-                <AsideWidgetCats categorias={categorias} pagina={pagina} />
+                {widget_categorias}
             </aside>
 
             <section>
                 <Card_Item posts_data={posts_data}/>
+
+                <div id="more" >
+                    {
+                        query.limite < posts_data.total_posts?(
+                            <button onClick={more} >Mas items</button>
+                        ):null
+                    }
+                </div>
             </section>
         </main>
     )
 }
-export const getServerSideProps:GetServerSideProps = async ({params}:GetServerSidePropsContext)=>{
-const {cat}:any = params
-
+export const getServerSideProps:GetServerSideProps = async ({query}:GetServerSidePropsContext)=>{
+const {cat,limite}:any = query
+    parseInt(limite)
     const categorias =  await get_categorias({url_post:'accesorios'})
     const pagina:TGetPost =  await get_post({tipo:'pagina',url:'accesorios'})
-    const posts_data:TGetPosts =  await get_posts({tipo:'accesorio',categoria:cat})
+    const posts_data:TGetPosts =  await get_posts({tipo:'accesorio',categoria:cat,limite:limite?limite:12})
 
     return {props:{
             categorias,
             pagina,
-            posts_data
+            posts_data,
+            query
         }}
     
 }

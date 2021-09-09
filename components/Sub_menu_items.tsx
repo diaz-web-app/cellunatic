@@ -38,7 +38,7 @@ const SubMenuItems = ({pagina}:TCategories) => {
                         const data =  categoriasMenu.filter(current=>current.url == cat)
                             return data.map(category=>{
                                 return (
-                                    <li onClick={menu_handler} key={category._id} ><Link href={"/"+pagina.url+"/"+category.url}><a href={"/"+pagina.url+"/"+category.url}>{category.titulo}</a></Link></li>
+                                    <li onClick={menu_handler} key={category._id} ><Link href={"/"+pagina.url+"/"+category.url+'?limite=12'}><a href={"/"+pagina.url+"/"+category.url+'?limite=12'}>{category.titulo}</a></Link></li>
                                 )
                             })
                         })

@@ -6,7 +6,7 @@ const SearchBar = () => {
         e.preventDefault()
         const {search} = e.target
         if(search.value == '') return
-        const path = "/search/"+search.value
+        const path = "/search/"+search.value+"?limite=12"
         push(path)
     }
     return (<>
@@ -18,12 +18,19 @@ const SearchBar = () => {
                     `
                     form{
                         width:100%;
+                        background:none;
+                        outline:none;
                     }
                     form input{
                         width:100%;
                         display:block;
                         background:none;
+                        outline:none;
                         margin-right:20px;
+                    }
+                    form input:focus, form input:active, form input:hover{
+                        background:none;
+                        outline:none;
                     }
                     @media(min-width:960px){
                         form input{

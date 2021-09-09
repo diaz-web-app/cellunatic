@@ -7,7 +7,6 @@ import { useMemo, useState } from "react";
 import LastPosts from "../../components/Last_Posts";
 import ModalCompra from "../../components/modal.compra";
 import ModalCovers from "../../components/modal.covers";
-import ModalShare from "../../components/modal.share";
 
 type Props={
     pagina:TGetPost
@@ -16,6 +15,7 @@ type Props={
 const The_post = ({pagina,accesorios}:Props) => {
     const {asPath} = useRouter()
     const [modalCovers,setModalCovers] = useState<boolean>(false)
+    const [thumb,setThumb] = useState<string>(pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:'/logo512x512.png')
 
     const items = useMemo(()=>{
         if(accesorios && accesorios.total_posts > 0){
@@ -52,12 +52,26 @@ const The_post = ({pagina,accesorios}:Props) => {
             </Head>
 
             <section className="full_width">
-                <h1>{pagina.post?.titulo}</h1>
                 <article className="container_detalles_item" >
-                    <div className="imgs">
-                        <img onClick={()=>setModalCovers(true)} src={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:'/logo512x512.png'} alt=""/>
+                <div className="thumbs" >
+                        {
+                        pagina.covers.length > 0?
+                            pagina.covers.map(cover=>{
+                                return(
+                                    <div key={cover._id} onClick={()=>setThumb(process.env.API+cover.url)} >
+                                        <img src={process.env.API+cover.url} alt={process.env.API+cover.url} />
+                                    </div>
+                                )
+                            })
+                        :null
+                    }
                     </div>
-                    <div className="detalles">                        
+                    <div className="imgs">
+                        
+                        <img loading="lazy" onClick={()=>setModalCovers(true)} src={thumb} alt=""/>
+                    </div>
+                    <div className="detalles">
+                        <h1>{pagina.post?.titulo}</h1>                        
                         <div className="caracteristicas">
                             {
                                 pagina.metas.map((meta:TMeta,i:number)=>{
@@ -69,15 +83,14 @@ const The_post = ({pagina,accesorios}:Props) => {
                                 })
                             }
                         </div>
-                        <p>{pagina.post?.contenido}</p>
+                        <p><b>Retiro en tienda:</b> CC gran bazar centro, Valencia Edo. Carabobo, calle comercio entre montes de oca y Carabobo, Planta alta local ML-116</p>
                         <div className="actions">
                             <ModalCompra/>
-                            <ModalShare post={pagina.post?pagina.post:undefined} />
                         </div>
                     </div>
-                    <ModalCovers modal={modalCovers} setModal={setModalCovers} src={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:'/logo512x512.png'} />
+                    <ModalCovers modal={modalCovers} setModal={setModalCovers} src={thumb} />
                 </article>
-
+                
                 {items}
             </section>
             <style jsx>
@@ -90,23 +103,45 @@ const The_post = ({pagina,accesorios}:Props) => {
                             display:grid;
                             grid-template-columns:1fr;
                             gap:10px;
+                            position:relative;
+                        }
+                        .container_detalles_item h1{
+                            margin:0 auto;
                         }
                         .imgs,.detalles{
-                            background:var(--primary-color);
                             height:max-content;
-                            border-radius:10px;
+                            border-radius:var(--radius);
                         }
                         .imgs{
                             text-align:center;
+                            order:1;
                         }
-                        .imgs img{
+                        .thumbs{
+                            width:100%;
+                            max-height:100px;
+                            overflow:auto;
+                            display:flex;
+                            flex-flow:row nowrap;
+                            order:2;
+                        }
+                        .thumbs div{
+                            width:90px;
+                            min-width:90px;
+                            height:90px;
+                            box-shadow:var(--shadow);
+                            margin: 0 10px;
+                        }
+                        .imgs img,.thumbs img{
                             width:100%;
                             height:100%;
                             max-height:400px;
                             object-fit:contain;
                         }
                         .detalles{
+                            order:3;
                             padding:10px;
+                            background:var(--primary-color);
+                            box-shadow:var(--shadow);
                         }
                         .post_metas{
                             margin-bottom:10px;
@@ -117,9 +152,43 @@ const The_post = ({pagina,accesorios}:Props) => {
                         .post_metas b{
                             text-transform:uppercase;
                         }
-                        @media(min-width:760px){
+                        .actions{
+                            width:100%;
+                        }
+                        @media(min-width:640px){
                             .container_detalles_item{
-                                grid-template-columns:1fr 1fr;
+                                grid-template-columns:100px 1fr 300px;
+                            }
+                            .thumbs{
+                                grid-template-columns:100px;
+                                grid-auto-rows:100px;
+                                gap:20px;
+                            } 
+                        }
+                        @media(min-width:640px){
+                            .container_detalles_item{
+                                grid-template-columns:1fr 350px;
+                            }
+                            .thumbs{
+                                order:1;
+                                grid-column:1 / span 2;
+                            } 
+                            .imgs{
+                                order:2;
+                            }
+                        }
+                        @media(min-width:960px){
+                            .container_detalles_item{
+                                grid-template-columns:120px 1fr 350px;
+                            } 
+                            .thumbs{
+                                grid-column:unset;
+                                flex-flow:column;
+                                height:100%;
+                                max-height:400px;
+                            }
+                            .thumbs div{
+                                margin:5px auto;
                             } 
                         }
                     `
@@ -132,6 +201,7 @@ export const getServerSideProps:GetServerSideProps = async ({params}:GetServerSi
     const {url}:any = params
     const pagina =  await get_post({url})
     const accesorios:TGetPosts = await get_posts({tipo:pagina.post.tipo,limite:6})
+    console.log(pagina.covers)
     return {props:{
             pagina,
             accesorios

@@ -9,16 +9,28 @@ import { useRouter } from "next/dist/client/router";
 
 type Props={
     accesorios:TGetPosts
+    query:any
 }
 
-const Accesorios = ({accesorios}:Props) => {
-    const {asPath} = useRouter()
+const Accesorios = ({accesorios,query}:Props) => {
+    const {asPath,push} = useRouter()
+
+    const more = ()=>{
+        let limite = parseInt(query.limite) + 4
+        if(limite <= accesorios.total_posts){            
+            push("/search/"+query.text+"?limite="+limite+"#more")
+        }
+        if(limite > accesorios.total_posts){            
+            push("/search/"+query.text+"?limite="+accesorios.total_posts+"#more")
+        }
+    }
+
     const items = useMemo(()=>{
         if(accesorios.posts){
             return <Card_Item posts_data={accesorios} />
         }
     },[accesorios])
-
+    
     return (
         <main>
             <Head>
@@ -44,16 +56,18 @@ const Accesorios = ({accesorios}:Props) => {
             </Head>
 
             <section className="full_width">
-                
-
-                <article className="copy_article" >
                     <h2>Resultados de busqueda</h2>
 
-                    <ul className="container_items">
+                    
                        {items}
-                    </ul>
-
-                </article>
+                    
+                    <div id="more" >
+                    {
+                        !query.limite || query.limite < accesorios.total_posts?(
+                            <button onClick={more} >Mas items</button>
+                        ):null
+                    }
+                </div>
             </section>
             <style jsx>
                 {
@@ -66,7 +80,7 @@ const Accesorios = ({accesorios}:Props) => {
                         .container_detalles_item .imgs, .container_detalles_item .detalles{
                             background:var(--primary-color);
                             height:max-content;
-                            border-radius:10px;
+                            border-radius:var(--radius);
                         }
                         .container_detalles_item .imgs{
                             text-align:center;
@@ -92,12 +106,13 @@ const Accesorios = ({accesorios}:Props) => {
         </main>
     )
 }
-export const getServerSideProps:GetServerSideProps = async ({params}:GetServerSidePropsContext)=>{
-    const {text}:any = params
-    
-    const accesorios = await get_search({text})
+export const getServerSideProps:GetServerSideProps = async ({query}:GetServerSidePropsContext)=>{
+    const {text,limite}:any = query
+    parseInt(limite)
+    const accesorios = await get_search({text,limite:limite?limite:12})
     return {props:{
-            accesorios
+            accesorios,
+            query
         }}
 }
 export default Accesorios

@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { useContext, useMemo } from 'react'
 import GlobalAppContext from '../context/app/app_state'
+import { Icon_Menu_Outlinet } from './icons'
+import ModalShare from './modal.share'
 import SearchBar from './Search_bar'
 
 
@@ -26,9 +28,10 @@ const Header = () => {
                     </a>
                 </Link>
                 {searchbar}
-                <div className="nav_header">                    
-                    <button onClick={menu_handler} >menu</button>
-                </div>
+                <ModalShare /> 
+                          
+                <button onClick={menu_handler} ><Icon_Menu_Outlinet color="var(--secondary-color)" /></button>
+                
             </div>
 
         </header>

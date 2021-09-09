@@ -22,7 +22,7 @@ const Card_Item = ({posts_data}:Params) => {
                                 <Link href={"/"+post.url} key={post._id}>
                                 <a href={"/"+post.url} className="post_card">
                                     <div className="post_card_container_cover">
-                                        <img src={post.cover?process.env.API+post.cover:'/favicon.ico'} alt={post.titulo}/>
+                                        <img loading="lazy" src={post.cover?process.env.API+post.cover:'/favicon.ico'} alt={post.titulo}/>
                                     </div>
                                     <div className="post_card_data">
                                         <h4>{post.titulo}</h4>                                        

@@ -10,7 +10,7 @@ const AsideWidgetAds=()=>{
                 {
                     `
                         ul{
-                            border-radius:10px;
+                            border-radius:var(--radius);
                             padding:8px 5px;
                             background:var(--primary-color);
                             margin-bottom:10px;

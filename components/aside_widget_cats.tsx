@@ -13,8 +13,8 @@ const AsideWidgetCats=({pagina,categorias}:ParamsCatWidget)=>{
                 categorias.map((categoria:TCategoria,i:number)=>{
                         return (
                             <li key={i}>
-                                <Link href={"/"+pagina?.post?.url+'/'+categoria.url} >
-                                    <a href={"/"+pagina?.post?.url+'/'+categoria.url} title={categoria.titulo} >{categoria.titulo}</a>
+                                <Link href={"/"+pagina?.post?.url+'/'+categoria.url+'?limite=12'} >
+                                    <a href={"/"+pagina?.post?.url+'/'+categoria.url+'?limite=12'} title={categoria.titulo} >{categoria.titulo}</a>
                                 </Link>
                             </li>
                     )
@@ -24,7 +24,7 @@ const AsideWidgetCats=({pagina,categorias}:ParamsCatWidget)=>{
                 {
                     `
                         ul{
-                            border-radius:10px;
+                            border-radius:var(--radius);
                             padding:8px 5px;
                             background:var(--primary-color);
                             margin-bottom:10px;

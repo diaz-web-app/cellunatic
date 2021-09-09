@@ -9,7 +9,7 @@ const TSG_article = ({src,text,title}:Props)=>{
     return (
         <article>
             <h2>{title}</h2>
-            <img src={src} alt={title} />
+            <img loading="lazy" src={src} alt={title} />
             <p>
                 {text}
             </p>
@@ -22,7 +22,7 @@ const TSG_article = ({src,text,title}:Props)=>{
                         width:100%;
                         height:250px;
                         object-fit:cover;
-                        border-radius:10px;
+                        border-radius:var(--radius);
                     }
                     p{
                         padding:10px;

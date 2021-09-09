@@ -86,7 +86,8 @@ function Myapp({ Component, pageProps }: AppProps) {
           }
           *::-webkit-scrollbar{
             width:5px;
-            background: var(--primary-color);
+            height:5px;
+            background: transparent;
           }
           *::-webkit-scrollbar-thumb{
             background:var(--secondary-color);
@@ -119,13 +120,14 @@ function Myapp({ Component, pageProps }: AppProps) {
               margin: 0 auto;
           }
           button{
-              border-radius:4px;
-              border:1px solid var(--secondary-color);
-              background: var(--primary-color);
-              margin: 5px;
-              padding: 4px 6px;
               text-transform: uppercase;
               cursor: pointer;
+              display:flex;
+              flex-fow:row wrap;
+              justify-content:center;
+              align-items:center;
+              align-content:center;
+              background:transparent;
           }
           main{
               display: grid;
@@ -149,9 +151,10 @@ function Myapp({ Component, pageProps }: AppProps) {
               flex-flow: row nowrap;
               justify-content: space-between;
               align-items: center;
-              margin-top:calc(var(--height-header) / 5);
+              margin-top:calc(var(--height-header) / 8);
               background:rgba(0,0,0, .5);
-              border-radius:10px;
+              border-radius:var(--radius);
+              padding:6px 4px;
           }
           .header_barr .logo{
               color:var(--secondary-color);
@@ -162,12 +165,6 @@ function Myapp({ Component, pageProps }: AppProps) {
           .header_barr .logo b{
               display: none;
           }
-          .nav_header{
-              width:auto;
-          }
-          .nav_header .btn_login{
-              display: none;
-          }
           
           /*/////////////////////////*/
          
@@ -175,78 +172,11 @@ function Myapp({ Component, pageProps }: AppProps) {
           .coursive{
               font-family: 'cellunatic' !important;
           }
-          /* Intro de la web*/
-          .intro{
-              width: 100%;
-              height: calc(100vmax - var(--height-header));
-              max-height: 512px;
-              display:flex;
-              flex-flow: row wrap;
-              justify-content: center;
-              align-items: center;
-              align-content: center;
-          }
-          .intro > img{
-              width:280px;
-              height:280px;
-          }
           
-          .intro > div p, .intro > div > h1{
-              text-align: center;
-              margin: 5px auto;
-          }
-          .intro > div > h1{
-              font-size: 2.5em;
-          }
-          
-          .intro > div > p{
-              font-size: 1.5em;
-          }
-          nav.botonera{
-              margin: 10px auto;
-          }
-          nav.botonera > a{
-              background-color: var(--primary-color);
-              margin:10px;
-              border:2px solid var(--secondary-color);
-              padding:2px 5px;
-          }
-          /*//////*/
-          @media(min-width:480px){
-              /*Intro*/
-              .intro > img{
-                  width:40vmin;
-                  height:40vmin;
-              }
-              .intro > div:first-child{
-                  width:50%;
-              }
-              /*/////////////*/
-          }
-          @media(min-width:512px){
-              /*intro*/
-              .intro > img{
-                  width:250px;
-                  height: 250px;
-              }
-              /*////////*/
-          }
-          @media(min-width:580px){
-            /*barra header*/
-            .header_barr .logo b{
-              display: contents;
-            }
-          }
+         
           @media(min-width:720px){
-              /*Intro*/
-              .intro > div > h1{
-                  font-size: 3.5em;
-              }
-              /*///*/
-          
-              /*barra header*/
-              .nav_header .btn_login{
-                  display: contents;
+              .header_barr .logo b{
+                  display:contents;
               }
               /*//////*/
           }
@@ -263,12 +193,13 @@ function Myapp({ Component, pageProps }: AppProps) {
               }
               .full_width{
                   grid-column: 1 / span 2;
+                  position:relative;
               }
           }
           
           @media(min-width:1080px){
               main,.container{
-                  width: 80%;
+                  width: 90%;
               }
           }`
       }
