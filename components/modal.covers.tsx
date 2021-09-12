@@ -11,6 +11,7 @@ const ModalCovers = ({src,modal,setModal}:Props) => {
         <div onClick={()=>setModal(false)} style={{ position: 'fixed', width: '100vw', height: '100vh',top:0,left:0,right:0,bottom:0, zIndex: 1000, background:'var(--primary-color)' }} ></div>
             <div className="img_box" style={{ padding:'10px 5px', borderRadius:5, position: 'fixed',background:'var(--primary-color)', border:'1px solid var(--font-color)', zIndex: 1001 }}>
                 <img src={src} alt="cover" />
+                <button onClick={()=>setModal(false)}>Cerrar</button>
             </div>
 
             <style jsx>
@@ -25,6 +26,11 @@ const ModalCovers = ({src,modal,setModal}:Props) => {
                         height: calc(100vh - 10%);
                         top:5%;bottom:5%;left:5%;right:5%;
                         overflow:hidden;
+                        position:relative;
+                    }
+                    .img_box button{
+                        position:absolute;
+                        right:10px;top:10px;
                     }
                     img{
                         width:100%;

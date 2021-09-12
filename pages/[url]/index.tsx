@@ -1,6 +1,6 @@
 import Head from "next/head";
 import {GetServerSideProps,GetServerSidePropsContext} from 'next'
-import { get_post, get_posts } from "../../api/get_posts_controllers";
+import { get_post, get_search } from "../../api/get_posts_controllers";
 import { TGetPost, TGetPosts, TMeta } from "../../interfaces/interfaces";
 import { useRouter } from "next/dist/client/router";
 import { useMemo, useState } from "react";
@@ -9,45 +9,45 @@ import ModalCompra from "../../components/modal.compra";
 import ModalCovers from "../../components/modal.covers";
 
 type Props={
-    pagina:TGetPost
-    accesorios:TGetPosts
+    the_post:TGetPost
+    similares:TGetPosts
 }
-const The_post = ({pagina,accesorios}:Props) => {
+const The_post = ({the_post,similares}:Props) => {
     const {asPath} = useRouter()
     const [modalCovers,setModalCovers] = useState<boolean>(false)
-    const [thumb,setThumb] = useState<string>(pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:'/logo512x512.png')
+    const [thumb,setThumb] = useState<string>(the_post.post && the_post.post.cover?process.env.API+the_post.post.cover:'/logo512x512.png')
 
     const items = useMemo(()=>{
-        if(accesorios && accesorios.total_posts > 0){
+        if(similares && similares.total_posts > 0){
 
-            return <LastPosts request_posts={accesorios} 
+            return <LastPosts request_posts={similares} 
             title='Articulos similares' 
             text=''
             />
         }
-    },[accesorios])
+    },[similares])
 
     return (
         <main>
             <Head>
-                <title>{pagina.post?pagina.post.titulo:''} - Cellunatic</title>
-                <meta name="description" content={pagina.post?pagina.post.contenido:''} />
-                <meta name="keywords" content={pagina.post?pagina.post.keywords:''}/>
+                <title>{the_post.post?the_post.post.titulo:''} - Cellunatic</title>
+                <meta name="description" content={the_post.post?the_post.post.contenido:''} />
+                <meta name="keywords" content={the_post.post?the_post.post.keywords:''}/>
                 <link rel="canonical" href={process.env.DOMAIN+asPath} />
                 <meta property="og:locale" content="es_ES" />
                 <meta property="og:type" content="website" />
-                <meta property="og:title" content={pagina.post?pagina.post.titulo:'cellunatic'}/>
-                <meta property="og:description" content={pagina.post?pagina.post.contenido:''} />
+                <meta property="og:title" content={the_post.post?the_post.post.titulo:'cellunatic'}/>
+                <meta property="og:description" content={the_post.post?the_post.post.contenido:''} />
                 <meta property="og:url" content={process.env.DOMAIN+asPath} />
                 <meta property="og:site_name" content={process.env.DOMAIN} />
-                <meta property="og:image" content={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
-                <meta property="og:image:secure_url" content={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
+                <meta property="og:image" content={the_post.post && the_post.post.cover?process.env.API+the_post.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
+                <meta property="og:image:secure_url" content={the_post.post && the_post.post.cover?process.env.API+the_post.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
                 <meta property="og:image:width" content="32" />
                 <meta property="og:image:height" content="32" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:description" content={pagina.post?pagina.post.contenido:''} />
-                <meta name="twitter:title" content={pagina.post?pagina.post.titulo+' - Cellunatic':'Cellunatic'} />
-                <meta name="twitter:image" content={pagina.post && pagina.post.cover?process.env.API+pagina.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
+                <meta name="twitter:description" content={the_post.post?the_post.post.contenido:''} />
+                <meta name="twitter:title" content={the_post.post?the_post.post.titulo+' - Cellunatic':'Cellunatic'} />
+                <meta name="twitter:image" content={the_post.post && the_post.post.cover?process.env.API+the_post.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
                 <link rel="shortlink" href={process.env.DOMAIN+asPath} />
             </Head>
 
@@ -55,8 +55,8 @@ const The_post = ({pagina,accesorios}:Props) => {
                 <article className="container_detalles_item" >
                 <div className="thumbs" >
                         {
-                        pagina.covers.length > 0?
-                            pagina.covers.map(cover=>{
+                        the_post.covers.length > 0?
+                            the_post.covers.map(cover=>{
                                 return(
                                     <div key={cover._id} onClick={()=>setThumb(process.env.API+cover.url)} >
                                         <img src={process.env.API+cover.url} alt={process.env.API+cover.url} />
@@ -71,10 +71,10 @@ const The_post = ({pagina,accesorios}:Props) => {
                         <img loading="lazy" onClick={()=>setModalCovers(true)} src={thumb} alt=""/>
                     </div>
                     <div className="detalles">
-                        <h1>{pagina.post?.titulo}</h1>                        
+                        <h1>{the_post.post?.titulo}</h1>                        
                         <div className="caracteristicas">
                             {
-                                pagina.metas.map((meta:TMeta,i:number)=>{
+                                the_post.metas.map((meta:TMeta,i:number)=>{
                                     return(
                                         <div className="post_metas" key={i} >
                                             <b>{meta.clave}: </b><label>{meta.contenido}</label>
@@ -199,12 +199,11 @@ const The_post = ({pagina,accesorios}:Props) => {
 }
 export const getServerSideProps:GetServerSideProps = async ({params}:GetServerSidePropsContext)=>{
     const {url}:any = params
-    const pagina =  await get_post({url})
-    const accesorios:TGetPosts = await get_posts({tipo:pagina.post.tipo,limite:6})
-    console.log(pagina.covers)
+    const the_post =  await get_post({url})
+    const similares:TGetPosts = await get_search({text:url.replace('-',' '),limite:6})
     return {props:{
-            pagina,
-            accesorios
+            the_post,
+            similares
         }}
 }
 export default The_post
