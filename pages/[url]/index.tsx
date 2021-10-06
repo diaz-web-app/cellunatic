@@ -3,10 +3,11 @@ import {GetServerSideProps,GetServerSidePropsContext} from 'next'
 import { get_post, get_search } from "../../api/get_posts_controllers";
 import { TGetPost, TGetPosts, TMeta } from "../../interfaces/interfaces";
 import { useRouter } from "next/dist/client/router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import LastPosts from "../../components/Last_Posts";
 import ModalCompra from "../../components/modal.compra";
 import ModalCovers from "../../components/modal.covers";
+import Image from 'next/image'
 
 type Props={
     the_post:TGetPost
@@ -15,7 +16,7 @@ type Props={
 const The_post = ({the_post,similares}:Props) => {
     const {asPath} = useRouter()
     const [modalCovers,setModalCovers] = useState<boolean>(false)
-    const [thumb,setThumb] = useState<string>(the_post.post && the_post.post.cover?process.env.API+the_post.post.cover:'/logo512x512.png')
+    const [thumb,setThumb] = useState<string>(the_post.post && the_post.post.cover?the_post.post.cover:'/logo512x512.png')
 
     const items = useMemo(()=>{
         if(similares && similares.total_posts > 0){
@@ -26,28 +27,31 @@ const The_post = ({the_post,similares}:Props) => {
             />
         }
     },[similares])
+    useEffect(()=>{
+        setThumb(the_post.post && the_post.post.cover?the_post.post.cover:'/logo512x512.png')
+    },[asPath])
 
     return (
         <main>
             <Head>
                 <title>{the_post.post?the_post.post.titulo:''} - Cellunatic</title>
-                <meta name="description" content={the_post.post?the_post.post.contenido:''} />
-                <meta name="keywords" content={the_post.post?the_post.post.keywords:''}/>
+                <meta name="description" content={the_post.post?the_post.post.valor:''} />
+                <meta name="keywords" content={the_post.post?the_post.post.meta_keywords:''}/>
                 <link rel="canonical" href={process.env.DOMAIN+asPath} />
                 <meta property="og:locale" content="es_ES" />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={the_post.post?the_post.post.titulo:'cellunatic'}/>
-                <meta property="og:description" content={the_post.post?the_post.post.contenido:''} />
+                <meta property="og:description" content={the_post.post?the_post.post.valor:''} />
                 <meta property="og:url" content={process.env.DOMAIN+asPath} />
                 <meta property="og:site_name" content={process.env.DOMAIN} />
-                <meta property="og:image" content={the_post.post && the_post.post.cover?process.env.API+the_post.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
-                <meta property="og:image:secure_url" content={the_post.post && the_post.post.cover?process.env.API+the_post.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
+                <meta property="og:image" content={the_post.post && the_post.post.cover?the_post.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
+                <meta property="og:image:secure_url" content={the_post.post && the_post.post.cover?the_post.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
                 <meta property="og:image:width" content="32" />
                 <meta property="og:image:height" content="32" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:description" content={the_post.post?the_post.post.contenido:''} />
+                <meta name="twitter:description" content={the_post.post?the_post.post.valor:''} />
                 <meta name="twitter:title" content={the_post.post?the_post.post.titulo+' - Cellunatic':'Cellunatic'} />
-                <meta name="twitter:image" content={the_post.post && the_post.post.cover?process.env.API+the_post.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
+                <meta name="twitter:image" content={the_post.post && the_post.post.cover?the_post.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
                 <link rel="shortlink" href={process.env.DOMAIN+asPath} />
             </Head>
 
@@ -58,8 +62,8 @@ const The_post = ({the_post,similares}:Props) => {
                         the_post.covers.length > 0?
                             the_post.covers.map(cover=>{
                                 return(
-                                    <div key={cover._id} onClick={()=>setThumb(process.env.API+cover.url)} >
-                                        <img src={process.env.API+cover.url} alt={process.env.API+cover.url} />
+                                    <div key={cover._id} onClick={()=>setThumb(cover.url)} >
+                                        <Image width={80} height={80} layout="responsive" src={cover.url} alt={the_post.post?.titulo} />
                                     </div>
                                 )
                             })
@@ -68,7 +72,7 @@ const The_post = ({the_post,similares}:Props) => {
                     </div>
                     <div className="imgs">
                         
-                        <img loading="lazy" onClick={()=>setModalCovers(true)} src={thumb} alt=""/>
+                        <Image width={80} height={80} layout="responsive" onClick={()=>setModalCovers(true)} src={thumb} alt={the_post.post?.titulo}/>
                     </div>
                     <div className="detalles">
                         <h1>{the_post.post?.titulo}</h1>                        
@@ -77,7 +81,7 @@ const The_post = ({the_post,similares}:Props) => {
                                 the_post.metas.map((meta:TMeta,i:number)=>{
                                     return(
                                         <div className="post_metas" key={i} >
-                                            <b>{meta.clave}: </b><label>{meta.contenido}</label>
+                                            <b>{meta.clave}: </b><label>{meta.valor}</label>
                                         </div>
                                     )
                                 })

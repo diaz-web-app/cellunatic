@@ -1,3 +1,6 @@
+
+import Image from 'next/image'
+
 type Props={
     src:string
     title:string
@@ -9,7 +12,7 @@ const TSG_article = ({src,text,title}:Props)=>{
     return (
         <article>
             <h2>{title}</h2>
-            <img loading="lazy" src={src} alt={title} />
+            <Image width={150} height={100} layout="responsive" src={src} alt={title} />
             <p>
                 {text}
             </p>

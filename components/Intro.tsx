@@ -19,7 +19,7 @@ const Intro = ()=>{
                        
                 </nav>
 
-                <style>
+                <style jsx>
                     {
                         `
                         /* Intro de la web*/

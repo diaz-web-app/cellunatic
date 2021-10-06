@@ -18,13 +18,13 @@ const Accesorios = ({categorias,pagina}:Props) => {
         <main>
             <Head>
                 <title>{pagina.post?pagina.post.titulo:''} - Cellunatic</title>
-                <meta name="description" content={pagina.post?pagina.post.contenido:''} />
+                <meta name="description" content={pagina.post?pagina.post.valor:''} />
                 <meta name="keywords" content={""}/>
                 <link rel="canonical" href={process.env.DOMAIN+asPath} />
                 <meta property="og:locale" content="es_ES" />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={pagina.post?pagina.post.titulo:'cellunatic'}/>
-                <meta property="og:description" content={pagina.post?pagina.post.contenido:''} />
+                <meta property="og:description" content={pagina.post?pagina.post.valor:''} />
                 <meta property="og:url" content={process.env.DOMAIN+asPath} />
                 <meta property="og:site_name" content={process.env.DOMAIN} />
                 <meta property="og:image" content={process.env.DOMAIN+"/logo512x512.png"} />
@@ -32,7 +32,7 @@ const Accesorios = ({categorias,pagina}:Props) => {
                 <meta property="og:image:width" content="32" />
                 <meta property="og:image:height" content="32" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:description" content={pagina.post?pagina.post.contenido:''} />
+                <meta name="twitter:description" content={pagina.post?pagina.post.valor:''} />
                 <meta name="twitter:title" content={pagina.post?pagina.post.titulo+' - Cellunatic':'Cellunatic'} />
                 <meta name="twitter:image" content={process.env.DOMAIN+"/logo512x512.png"} />
                 <link rel="shortlink" href={process.env.DOMAIN+asPath} />

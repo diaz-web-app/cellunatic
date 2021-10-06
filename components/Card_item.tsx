@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { TGetPosts } from "../interfaces/interfaces"
+import Image from 'next/image'
 
 type Params={
     posts_data:TGetPosts
@@ -14,7 +15,7 @@ const Card_Item = ({posts_data}:Params) => {
                             const post_meta:any = {}
                             for(let meta of posts_data.metas){
                                 if(meta.id_post == post._id){
-                                    post_meta[meta.clave] = meta.contenido
+                                    post_meta[meta.clave] = meta.valor
                                 }
                             }
                             
@@ -22,7 +23,7 @@ const Card_Item = ({posts_data}:Params) => {
                                 <Link href={"/"+post.url} key={post._id}>
                                 <a href={"/"+post.url} className="post_card">
                                     <div className="post_card_container_cover">
-                                        <img loading="lazy" src={post.cover?process.env.API+post.cover:'/favicon.ico'} alt={post.titulo}/>
+                                        <Image width={100} height={100} placeholder="blur" layout="responsive" src={post.cover?post.cover:'/favicon.ico'} alt={post.titulo}/>
                                     </div>
                                     <div className="post_card_data">
                                         <h4>{post.titulo}</h4>                                        
@@ -55,6 +56,7 @@ const Card_Item = ({posts_data}:Params) => {
                         width:100%;
                         height:200px;
                         text-align:center;
+                        overflow:hidden;
                     }
                     .container_cards .post_card .post_card_container_cover img{
                         width:100%;

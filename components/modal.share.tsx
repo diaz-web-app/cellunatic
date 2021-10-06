@@ -14,7 +14,7 @@ const ModalShare = ({post,text}:Props) => {
     const share_handler = async()=>{
         const shareData = {
             title: post?post?.titulo:'Cellunatic',
-            text: post?post?.contenido:'',
+            text: post?post?.valor:'',
             url: process.env.DOMAIN+asPath
           }
          

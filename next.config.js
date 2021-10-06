@@ -58,6 +58,10 @@ const nextConfig = {
   }
 module.exports = withOffline(
   {
+    images: {
+      domains: ['0.0.0.0','localhost','cellunatic.com'],
+      deviceSizes:[320,640]
+    },
     env:{
       API:process.env.API,
       DOMAIN:process.env.DOMAIN

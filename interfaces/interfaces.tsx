@@ -4,10 +4,11 @@ export type TPost={
       estado: string
       _id:string
       titulo:string
-      contenido:string
-      keywords:string
+      valor:string
+      meta_keywords:string
       html?: string
       tipo:string
+      hijo:string
       url:string
       cover?:string
       createdAt:string
@@ -29,13 +30,13 @@ export type TMeta={
     _id: string
     id_post: string
     clave: string
-    contenido: string
+    valor: string
     createdAt: string
     updatedAt: string
 }
 //****** post categorias ******//
 export type TCategoria={
-    tipo_post: string[]
+    tipo_post: string
     _id: string
     titulo: string
     url: string
