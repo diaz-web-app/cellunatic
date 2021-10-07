@@ -1,11 +1,11 @@
 import Link from 'next/link'
-
+import Image from 'next/image'
 
 const Intro = ()=>{
     
     return <article className="intro" >
 
-                <img loading="lazy" src="/logo192x192.png" alt="Cellunatic logo" />
+                <Image width={130} height={130} layout="fixed" src="/logo192x192.png" alt="Cellunatic logo" />
 
                 <div>
                     <h1 className="coursive" >Cellunatic 2017 CG C.A</h1>

@@ -24,7 +24,7 @@ const Card_Item = ({posts_data}:Params) => {
                                 <Link href={"/"+post.url} key={post._id}>
                                 <a href={"/"+post.url} className="post_card">
                                     <div className="post_card_container_cover">
-                                        <Image width={100} height={100} blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNksPh/GQADgwIMleRwwAAAAABJRU5ErkJggg==" placeholder="blur" layout="responsive" src={post.cover?post.cover:'/favicon.ico'} alt={post.titulo}/>
+                                        <Image width={100} height={100} blurDataURL="/favicon.ico" placeholder="blur" layout="responsive" src={post.cover?post.cover:'/favicon.ico'} alt={post.titulo}/>
                                     </div>
                                     <div className="post_card_data">
                                         <h4>{post.titulo}</h4>                                        
