@@ -4,8 +4,7 @@ module.exports = withOffline(
   {
     images: {
       domains: ['localhost','cellunatic.com','cloudinary.com','res.cloudinary.com'],
-      deviceSizes:[320,640],
-      loader:'cloudinary'
+      deviceSizes:[320,640]
     },
     env:{
       API:process.env.API,
