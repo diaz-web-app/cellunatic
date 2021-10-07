@@ -3,8 +3,9 @@ const withOffline = require('next-offline')
 module.exports = withOffline(
   {
     images: {
-      domains: ['localhost','cellunatic.com','cloudinary.com'],
-      deviceSizes:[320,640]
+      domains: ['localhost','cellunatic.com','cloudinary.com','res.cloudinary.com'],
+      deviceSizes:[320,640],
+      loader:'cloudinary'
     },
     env:{
       API:process.env.API,
