@@ -63,7 +63,7 @@ const The_post = ({the_post,similares}:Props) => {
                             the_post.covers.map(cover=>{
                                 return(
                                     <div key={cover._id} onClick={()=>setThumb(cover.url)} >
-                                        <Image width={80} height={80} layout="responsive" src={cover.url} alt={the_post.post?.titulo} />
+                                        <Image width={80} height={80} blurDataURL="/favicon.ico" placeholder="blur" layout="responsive" src={cover.url} alt={the_post.post?.titulo} />
                                     </div>
                                 )
                             })
@@ -72,7 +72,7 @@ const The_post = ({the_post,similares}:Props) => {
                     </div>
                     <div className="imgs">
                         
-                        <Image width={80} height={80} layout="responsive" onClick={()=>setModalCovers(true)} src={thumb} alt={the_post.post?.titulo}/>
+                        <Image width={80} height={80} layout="responsive" blurDataURL="/favicon.ico" placeholder="blur"  onClick={()=>setModalCovers(true)} src={thumb} alt={the_post.post?.titulo}/>
                     </div>
                     <div className="detalles">
                         <h1>{the_post.post?.titulo}</h1>                        
