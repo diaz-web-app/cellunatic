@@ -11,7 +11,7 @@ function Myapp({ Component, pageProps }: AppProps) {
   return <App_provider>
     <Head>
       <link rel="manifest" href="/site.webmanifest.json" />
-      <meta name="author" content="Diaz web app" />
+      <meta name="author" content="Cellunatic" />
       <meta property="fb:app_id" content="102477285277539" />
       <link rel="apple-touch-icon" href="/logo512x512.png" />
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />

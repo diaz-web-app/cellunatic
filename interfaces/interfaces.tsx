@@ -4,7 +4,7 @@ export type TPost={
       estado: string
       _id:string
       titulo:string
-      valor:string
+      meta_description:string
       meta_keywords:string
       html?: string
       tipo:string

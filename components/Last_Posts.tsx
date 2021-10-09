@@ -24,6 +24,9 @@ const LastPosts = ({request_posts,text,title}:Props)=>{
                         padding:10px;
                         margin-bottom:20px;
                     }
+                    h2{
+                        text-align:center;
+                    }
                     `
                 }
             </style>

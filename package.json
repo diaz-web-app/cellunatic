@@ -8,14 +8,15 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && cp .next/service-worker.js public/",
-    "export": "rm public/service-worker.js && next export",
+    "build": "next build",
+    "export": "next export",
     "start": "next start ",
     "type-check": "tsc"
   },
   "dependencies": {
     "next": "^11.1.2",
     "next-offline": "^4.0.6",
+    "next-pwa": "^5.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },

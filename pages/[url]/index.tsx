@@ -35,13 +35,13 @@ const The_post = ({the_post,similares}:Props) => {
         <main>
             <Head>
                 <title>{the_post.post?the_post.post.titulo:''} - Cellunatic</title>
-                <meta name="description" content={the_post.post?the_post.post.valor:''} />
+                <meta name="description" content={the_post.post?the_post.post.meta_description:''} />
                 <meta name="keywords" content={the_post.post?the_post.post.meta_keywords:''}/>
                 <link rel="canonical" href={process.env.DOMAIN+asPath} />
                 <meta property="og:locale" content="es_ES" />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={the_post.post?the_post.post.titulo:'cellunatic'}/>
-                <meta property="og:description" content={the_post.post?the_post.post.valor:''} />
+                <meta property="og:description" content={the_post.post?the_post.post.meta_description:''} />
                 <meta property="og:url" content={process.env.DOMAIN+asPath} />
                 <meta property="og:site_name" content={process.env.DOMAIN} />
                 <meta property="og:image" content={the_post.post && the_post.post.cover?the_post.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
@@ -49,7 +49,7 @@ const The_post = ({the_post,similares}:Props) => {
                 <meta property="og:image:width" content="32" />
                 <meta property="og:image:height" content="32" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:description" content={the_post.post?the_post.post.valor:''} />
+                <meta name="twitter:description" content={the_post.post?the_post.post.meta_description:''} />
                 <meta name="twitter:title" content={the_post.post?the_post.post.titulo+' - Cellunatic':'Cellunatic'} />
                 <meta name="twitter:image" content={the_post.post && the_post.post.cover?the_post.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
                 <link rel="shortlink" href={process.env.DOMAIN+asPath} />
@@ -63,7 +63,7 @@ const The_post = ({the_post,similares}:Props) => {
                             the_post.covers.map(cover=>{
                                 return(
                                     <div key={cover._id} onClick={()=>setThumb(cover.url)} >
-                                        <Image width={80} height={80} blurDataURL="/favicon.ico" placeholder="blur" layout="responsive" src={cover.url} alt={the_post.post?.titulo} />
+                                        <Image width={80} height={80} blurDataURL="/loading.svg" placeholder="blur" layout="responsive" src={cover.url} alt={the_post.post?.titulo} />
                                     </div>
                                 )
                             })
@@ -72,7 +72,7 @@ const The_post = ({the_post,similares}:Props) => {
                     </div>
                     <div className="imgs">
                         
-                        <Image width={80} height={80} layout="responsive" blurDataURL="/favicon.ico" placeholder="blur"  onClick={()=>setModalCovers(true)} src={thumb} alt={the_post.post?.titulo}/>
+                        <Image width={80} height={80} layout="responsive" blurDataURL="/loading.svg" placeholder="blur"  onClick={()=>setModalCovers(true)} src={thumb} alt={the_post.post?.titulo}/>
                     </div>
                     <div className="detalles">
                         <h1>{the_post.post?.titulo}</h1>                        
@@ -119,6 +119,7 @@ const The_post = ({the_post,similares}:Props) => {
                         .imgs{
                             text-align:center;
                             order:1;
+                            max-width:400px;
                         }
                         .thumbs{
                             width:100%;
@@ -183,7 +184,7 @@ const The_post = ({the_post,similares}:Props) => {
                         }
                         @media(min-width:960px){
                             .container_detalles_item{
-                                grid-template-columns:120px 1fr 350px;
+                                grid-template-columns:120px 1fr 400px;
                             } 
                             .thumbs{
                                 grid-column:unset;

@@ -5,7 +5,7 @@ const Intro = ()=>{
     
     return <article className="intro" >
 
-                <Image width={130} height={130} layout="fixed" src="/logo192x192.png" alt="Cellunatic logo" />
+                <Image width={130} height={130} layout="fixed" placeholder="blur" blurDataURL="/loading.svg" src="/logo192x192.png" alt="Cellunatic logo" />
 
                 <div>
                     <h1 className="coursive" >Cellunatic 2017 CG C.A</h1>

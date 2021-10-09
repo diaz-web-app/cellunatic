@@ -1,63 +1,7 @@
 
-const withOffline = require('next-offline')
-const nextConfig = {
-  workboxOpts: {
-    runtimeCaching: [
-      {
-        urlPattern: '/',
-        handler: 'CacheFirst',
-        options: {
-          cacheName: 'offlineCache',
-          expiration: {
-            maxEntries: 400
-            }
-          }
-      },
-      {
-        urlPattern: /\.js$/,
-        handler: 'CacheFirst',
-        options: {
-          cacheName: 'offlineCache',
-          expiration: {
-            maxEntries: 400
-            }
-          }
-      },
-      {
-        urlPattern: /\.css$/,
-        handler: 'CacheFirst',
-        options: {
-          cacheName: 'offlineCache',
-          expiration: {
-            maxEntries: 400
-            }
-          }
-      },
-      {
-        urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
-        handler: 'CacheFirst',
-        options: {
-          cacheName: 'offlineCache',
-          expiration: {
-            maxEntries: 400
-            }
-          }
-      },
-      {
-      urlPattern: /^https?.*/,
-      handler: 'NetworkFirst',
-      options: {
-        cacheName: 'offlineCache',
-        expiration: {
-          maxEntries: 400
-          }
-        }
-      }
-    ]
-  }
-  }
-  
-  module.exports = withOffline(
+const withPWA = require('next-pwa')
+
+  module.exports = withPWA(
     {
       images: {
         domains: ['localhost','cellunatic.com','cloudinary.com','res.cloudinary.com'],
@@ -66,6 +10,10 @@ const nextConfig = {
       env:{
         API:process.env.API,
         DOMAIN:process.env.DOMAIN
+      },
+      pwa:{
+	      dest:'public',
+        disable: process.env.NODE_ENV === 'development'
       }
     }
   )

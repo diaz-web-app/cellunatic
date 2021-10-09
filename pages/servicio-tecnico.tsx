@@ -15,13 +15,13 @@ const ServicioTecnico = ({pagina}:Props) => {
         <main>
             <Head>
                 <title>Servicio tecnico - Cellunatic</title>
-                <meta name="description" content={pagina.post?pagina.post.valor:''} />
+                <meta name="description" content={pagina.post?pagina.post.meta_description:''} />
                 <meta name="keywords" content={pagina.post?pagina.post.meta_keywords:''}/>
                 <link rel="canonical" href={process.env.DOMAIN+route} />
                 <meta property="og:locale" content="es_ES" />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={pagina.post?pagina.post.titulo:'cellunatic'}/>
-                <meta property="og:description" content={pagina.post?pagina.post.valor:''} />
+                <meta property="og:description" content={pagina.post?pagina.post.meta_description:''} />
                 <meta property="og:url" content={process.env.DOMAIN+route} />
                 <meta property="og:site_name" content={process.env.DOMAIN} />
                 <meta property="og:image" content={pagina.post && pagina.post.cover?pagina.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
@@ -29,7 +29,7 @@ const ServicioTecnico = ({pagina}:Props) => {
                 <meta property="og:image:width" content="32" />
                 <meta property="og:image:height" content="32" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:description" content={pagina.post?pagina.post.valor:''} />
+                <meta name="twitter:description" content={pagina.post?pagina.post.meta_description:''} />
                 <meta name="twitter:title" content={pagina.post?pagina.post.titulo+' - Cellunatic':'Cellunatic'} />
                 <meta name="twitter:image" content={pagina.post && pagina.post.cover?pagina.post.cover:process.env.DOMAIN+"/logo512x512.png"} />
                 <link rel="shortlink" href={process.env.DOMAIN+route} />

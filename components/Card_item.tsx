@@ -2,7 +2,7 @@ import Link from "next/link"
 import { TGetPosts } from "../interfaces/interfaces"
 import Image from 'next/image'
 
-//blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNksPh/GQADgwIMleRwwAAAAABJRU5ErkJggg=="
+
 type Params={
     posts_data:TGetPosts
 }
@@ -23,14 +23,10 @@ const Card_Item = ({posts_data}:Params) => {
                             return(
                                 <Link href={"/"+post.url} key={post._id}>
                                 <a href={"/"+post.url} className="post_card">
-                                    <div className="post_card_container_cover">
-                                        <Image width={100} height={100} blurDataURL="/favicon.ico" placeholder="blur" layout="responsive" src={post.cover?post.cover:'/favicon.ico'} alt={post.titulo}/>
-                                    </div>
+                                    <Image width={100} height={100} blurDataURL='/loading.svg' placeholder="blur" layout="responsive" src={post.cover?post.cover:'/favicon.ico'} alt={post.titulo} quality={40} />
+                                    
                                     <div className="post_card_data">
-                                        <h4>{post.titulo}</h4>                                        
-                                        <div className="post_metas">
-                                            <b>precio: </b> <small>$ {post_meta['precio']}</small>
-                                        </div>                              
+                                        <h4>{post.titulo}</h4>                              
                                     </div>
                                 </a>
                                 </Link>
@@ -45,27 +41,31 @@ const Card_Item = ({posts_data}:Params) => {
                     .container_cards{
                         display:grid;
                         grid-template-columns:repeat(2,1fr);
+                        grid-auto-rows:200px;
                         gap:1px;
                     }
-                    .container_cards .post_card{
+                    .post_card{
                         width:100%;
                         height:100%;
-                        overflow:hidden;
                         background:var(--primary-color);
-                    }
-                    .container_cards .post_card .post_card_container_cover{
-                        width:100%;
-                        height:200px;
-                        text-align:center;
+                        position:relative;
                         overflow:hidden;
                     }
-                    .container_cards .post_card .post_card_container_cover img{
-                        width:100%;
-                        height:100%;
-                        object-fit:contain;
+                    .post_card_container_cover{
+                        position:relative;
                     }
-                    .container_cards .post_card .post_card_data{
-                        padding:7px;
+                    .post_card_data{
+                        padding:2px 7px;
+                        position:absolute;
+                        width:100%;
+                        z-index:2;
+                        background:var(--alfa);
+                        bottom:0;
+                        height:60px;
+                        overflow:hidden;
+                    }
+                    .post_card_data h4{
+                        text-shadow:1px 1px black;
                     }
                     @media(min-width:640px){
                         .container_cards{

@@ -14,12 +14,13 @@ const ModalShare = ({post,text}:Props) => {
     const share_handler = async()=>{
         const shareData = {
             title: post?post?.titulo:'Cellunatic',
-            text: post?post?.valor:'',
+            text: post?post?.meta_description:'',
             url: process.env.DOMAIN+asPath
           }
          
             try {
               await navigator.share(shareData)
+              return
             } catch(err) {
                 setModal(true)
             }
